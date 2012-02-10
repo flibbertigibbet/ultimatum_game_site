@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>Your Games</title>
+</head>
+<body>
+  <h2>Welcome, ${your.player_name}!</h2>
+  
+
+  <div id="player-group">
+    <h3>You are a member of group: ${user_grp}.</h3>
+    <h3>Your total winnings so far: $$${your.total_winnings}.</h3>
+	<h2><div py:if="all_done">You have finished playing all your games!  Thanks for participating.</div></h2>
+  </div>
+  <div class="clearingdiv" />
+  
+  <div id="game-index">
+    <h2>Your Games</h2>
+    <table class="mygames">
+        <thead>
+            <tr><th>Game Number</th><th>Your Player Number</th>
+            <th>Other Player's Group</th>
+            <th>Total Amount Available</th>
+            <th>Offer Amount</th>
+            <th>Current Status</th>
+            <th>Make Play</th></tr>
+        </thead>
+        <tbody>
+            <tr py:for="game in games">
+            
+                <th class="game-id">${game.game_id}</th>
+                <td class="player-num"><div py:choose="game.player1_id">
+                    <span py:when="your.player_id">1</span>
+                    <span py:otherwise="">2</span></div></td>
+                <td class="other-group">${same_group[game.game_id]}</td>
+                <td class="game-total-amt">$$${game.total_sum}</td>
+                <td class="game-offer-amt">
+                    <div py:if="game.proposal_amt">
+                    $$${game.proposal_amt}</div></td>
+                <td class="game-status">${game_status[game.game_id]}</td>
+                <td class="make-play">
+                    <div py:if="play_forms[game.game_id]">
+                    <div py:replace="play_forms[game.game_id](game)">Input Form</div></div></td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="clearingdiv" />
+</body>
+</html>

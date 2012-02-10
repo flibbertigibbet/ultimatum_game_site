@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>Start Page</title>
+</head>
+<body>
+  <h2>Welcome, ${your.player_name}!</h2>
+  <h3>Total winnings so far: $$${your.total_winnings}</h3>
+
+  <div id="group-index">
+    <h2>Experiment Groups</h2>
+    <table class="group-listing">
+        <thead>
+            <tr><th>Group ID</th><th>Group Name</th></tr>
+        </thead>
+        <tbody>
+            <tr py:for="grp in exp_grps">
+                <th class="group-id">${grp.exp_group_id}</th>
+                <td class="group-name">${grp.exp_group_name}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="clearingdiv" />
+  
+  <div id="game-index">
+    <h2>Your Games</h2>
+    <table class="game-listing">
+        <thead>
+            <tr><th>Game ID</th><th>Total Amount</th></tr>
+        </thead>
+        <tbody>
+            <tr py:for="game in games">
+                <th class="game-id">${game.game_id}</th>
+                <td class="game-total-amt">${game.total_sum}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="clearingdiv" />
+</body>
+</html>
